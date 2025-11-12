@@ -1,14 +1,13 @@
 export function subsets(nums: number[]): number[][] {
-    if (nums.length === 1) return [nums];
-
-    const results: number[][] = [];
-    results.push(nums);
+    const results: number[][] = [[]];
 
     for(const num of nums) {
-        results.push(...subsets(nums.filter(n => n !== num)));
+        let partialResults = [];
+        for(let sublist of results) {
+            partialResults.push([...sublist, num])
+        }
+        results.push(...partialResults)
     }
 
     return results;
 };
-
-console.log(subsets([1,2,3]));
